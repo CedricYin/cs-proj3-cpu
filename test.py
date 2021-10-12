@@ -73,14 +73,15 @@ known_imports_dict["tests/part-b/edge/*.circ"] = known_imports_dict["tests/part-
 known_imports_dict["tests/part-b/integration/*.circ"] = known_imports_dict["tests/part-b/unit/*.circ"]
 
 def find_banned(circ_path):
-    with circ_path.open("r") as f:
-      contents = f.read()
-    found = False
-    for component_name in banned_component_names:
-      if re.search(fr'<comp.*\bname="{component_name}"', contents):
-        print(f"ERROR: found banned element ({component_name}) in {circ_path.as_posix()}")
-        found = True
-    return found
+  if circ_path.name in ["mem.circ"]: return False
+  with circ_path.open("r") as f:
+    contents = f.read()
+  found = False
+  for component_name in banned_component_names:
+    if re.search(fr'<comp.*\bname="{component_name}"', contents):
+      print(f"ERROR: found banned element ({component_name}) in {circ_path.as_posix()}")
+      found = True
+  return found
 
 starter_file_hashes = {
   "tests/part-a/addi/cpu-addi-basic.circ": "68ce93fcd5f02892858b5346cef9912c",
