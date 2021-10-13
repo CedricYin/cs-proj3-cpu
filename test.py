@@ -169,26 +169,13 @@ class TestCase():
     fix_circ(self.circ_path)
 
   def check_hashes(self, pipelined=False):
-    rel_path = self.circ_path.resolve().relative_to(proj_dir_path.resolve())
-    rel_path_str = rel_path.as_posix()
-    if rel_path_str not in starter_file_hashes:
-      return (True, "Starter does not have hash for circuit")
-    with self.circ_path.open("rb") as f:
-      hashed_val = hashlib.md5(f.read()).hexdigest()
-    if hashed_val != starter_file_hashes[rel_path_str]:
-      return (False, "Circuit was changed from starter")
+    passed, reason = check_hash(self.circ_path)
+    if not passed: return passed, reason
 
-    expected_table_path = self.get_expected_table_path(pipelined=pipelined)
-    rel_path = expected_table_path.resolve().relative_to(proj_dir_path.resolve())
-    rel_path_str = rel_path.as_posix()
-    if rel_path_str not in starter_file_hashes:
-      return (True, "Starter does not have hash for expected output")
-    with expected_table_path.open("rb") as f:
-      hashed_val = hashlib.md5(f.read()).hexdigest()
-    if hashed_val != starter_file_hashes[rel_path_str]:
-      return (False, "Expected output was changed from starter")
+    passed, reason = check_hash(self.get_expected_table_path(pipelined=pipelined))
+    if not passed: return passed, reason
 
-    return (True, "Circuit matches starter circuit")
+    return (True, "Circuit data matches starter code")
 
   def get_actual_table_path(self):
     return self.circ_path.parent / "student-output" / f"{self.name}-student.out"
@@ -324,6 +311,19 @@ def run_tests(search_paths, pipelined=False):
       failed_tests.append(test)
 
   print(f"Passed {len(passed_tests)}/{len(failed_tests) + len(passed_tests)} tests", flush=True)
+
+def check_hash(path):
+  rel_path = path.resolve().relative_to(proj_dir_path.resolve())
+  rel_path_str = rel_path.as_posix()
+  if rel_path_str not in starter_file_hashes:
+    return (True, f"Starter does not have hash for {path.name}")
+  with path.open("rb") as f:
+    contents = f.read()
+  contents = contents.replace(b"\r\n", b"\n")
+  hashed_val = hashlib.md5(contents).hexdigest()
+  if hashed_val != starter_file_hashes[rel_path_str]:
+    return (False, f"{path.name} was changed from starter")
+  return (True, f"{path.name} matches starter file")
 
 def kill_proc(proc):
   if proc.poll() is None:
