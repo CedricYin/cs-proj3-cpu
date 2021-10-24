@@ -299,7 +299,7 @@
       <a name="label" val="BSel"/>
     </comp>
     <comp lib="0" loc="(700,650)" name="Tunnel">
-      <a name="label" val="ALUSEL"/>
+      <a name="label" val="ALUSel"/>
       <a name="width" val="4"/>
     </comp>
     <comp lib="0" loc="(700,680)" name="Tunnel">
