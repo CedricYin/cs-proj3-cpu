@@ -146,12 +146,12 @@ starter_file_hashes = {
   "tests/part-b/integration/reference-output/cpu-integration-fib-ref.out": "527d353547095655073e25af73ce300d",
   "tests/part-b/integration/reference-output/cpu-integration-power-pipelined-ref.out": "de91d6c5b7c51f76f7c93e27292af53e",
   "tests/part-b/integration/reference-output/cpu-integration-power-ref.out": "d4e922c3511f02c889815608f7bcd72b",
-  "tests/part-b/unit/cpu-csrw.circ": "1d5d3e104c4abbabb2068bbadeace8c5",
-  "tests/part-b/unit/cpu-csrwi.circ": "5aa509c18341696d03211f34e50d6e51",
-  "tests/part-b/unit/reference-output/cpu-csrw-pipelined-ref.out": "ba334a498448a1530be4e3521658121a",
-  "tests/part-b/unit/reference-output/cpu-csrw-ref.out": "14ccb255996ab8d192e7a12edee9c9a9",
-  "tests/part-b/unit/reference-output/cpu-csrwi-pipelined-ref.out": "2d096c383d98657282d9dcb71ad93dc2",
-  "tests/part-b/unit/reference-output/cpu-csrwi-ref.out": "3a300c6801f40571cb5545505a0416a6",
+  "tests/part-b/unit/cpu-csrw.circ": "c52429dcb849fb55a97aae8ef36e225b",
+  "tests/part-b/unit/cpu-csrwi.circ": "e4895e6b0b0fe47c7654dc0306739efd",
+  "tests/part-b/unit/reference-output/cpu-csrw-pipelined-ref.out": "e6603795a5c1560ecfa478aa850ebe40",
+  "tests/part-b/unit/reference-output/cpu-csrw-ref.out": "2b25de178d49bcf528b201f162851174",
+  "tests/part-b/unit/reference-output/cpu-csrwi-pipelined-ref.out": "33ce8ffe4e8b5ac0642c292bf41a2007",
+  "tests/part-b/unit/reference-output/cpu-csrwi-ref.out": "34815f04f7119947f77cf6a0abcf7b8d",
 }
 
 class TestCase():
